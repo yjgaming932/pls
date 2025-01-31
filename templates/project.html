@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer List</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="container mt-5">
+
+    <h1 class="text-center">Customer List</h1>
+
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Name</th>
+                <th>Phone Number</th>
+                <th>Appointment</th>
+                <th>Project Area</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for customer in customers %}
+            <tr>
+                <td>{{ customer['id'] }}</td>
+                <td>{{ customer['date'] }}</td>
+                <td>{{ customer['name'] }}</td>
+                <td>{{ customer['phone_number'] }}</td>
+                <td>{{ customer['appointment'] }}</td>
+                <td>{{ customer['project_area'] }}</td>
+                <td>{{ customer['description'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ url_for('add') }}" class="btn btn-primary">Add New Customer</a>
+
+</body>
+</html>
